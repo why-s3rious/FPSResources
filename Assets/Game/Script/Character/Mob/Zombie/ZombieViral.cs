@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Yuri : Human
+public class ZombieViral : Zombie
 {
     // Start is called before the first frame update
     void Start()
     {
-        this.skillType = SkillType.SLOW_TIME;
-        this.Init(10f);
-        InitSkill(1,2,this.transform);
+        this.InitZombie(1f);
+        this.InitAbility(5f, 10f, 1.5f, 0, FrequencyType.ONCE, AbilityType.VIRAL);
     }
-   
-
 }

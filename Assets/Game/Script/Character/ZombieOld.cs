@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Zombie : Person
+public class ZombieOld : Person
 {
     //public Animator animator;
     //public Waypoint waypoint;

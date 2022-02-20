@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class Human : Mob
 {
     [SerializeField]
-    private SkillType skillType;
+    protected SkillType skillType;
     [SerializeField]
-    private Skill skill;
+    protected Skill skill;
 
     // Start is called before the first frame update
     public void InitSkill(float duration,float timeCoolDown,Transform player)

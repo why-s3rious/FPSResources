@@ -27,6 +27,7 @@ public class BaseBehaviour : StateMachineBehaviour
     {
         float distant = Vector3.Distance(player.position, this.zombie.transform.position);
         animator.SetFloat("DistantPlayer", distant);
+        this.zombie.CheckCanUseSpecial(distant);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

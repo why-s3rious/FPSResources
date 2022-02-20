@@ -5,10 +5,27 @@ using UnityEngine;
 public abstract class Mob : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
     protected float health;
+    [SerializeField]
     protected bool isDead = false;
 
+    private void Update()
+    {
+        if(!isDead)
+        {
+            if (health <= 0)
+            {
+                isDead = true;
+                OnDead();
+            }
+        }
+    }
+    public void SetDead()
+    {
+        TakeDamage(health);
 
+    }
     public void Init(float health)
     {
         this.health = health;
