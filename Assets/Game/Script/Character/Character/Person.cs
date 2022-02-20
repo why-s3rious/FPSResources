@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Person : MonoBehaviour
 {
+    [SerializeField]
     protected float health;
     protected Animator animator;
     [SerializeField]
@@ -16,6 +17,10 @@ public class Person : MonoBehaviour
         this.health = health;
         guiHealth.Init(health);
         this.animator = animator;
+    }
+    public void Init(float health)
+    {
+        this.health = health;
     }
 
     void Start()
