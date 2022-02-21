@@ -14,10 +14,11 @@ public class DeathBehaviour : BaseBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
+        //this.zombie.SetDead(true);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateinfo, int layerindex)
     {
-        Destroy(animator.gameObject);
+        //Destroy(animator.gameObject);
     }
 }

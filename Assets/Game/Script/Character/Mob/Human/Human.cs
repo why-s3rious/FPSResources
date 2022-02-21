@@ -35,12 +35,13 @@ public abstract class Human : Mob
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        opacityHurt = 1f;
         PlayerMenu.instance.TakeDamage(this.GetCurrentHealth());
     }
 
     protected override void OnDead()
     {
         base.OnDead();
+        Debug.Log("Player has die");
+        PlayerMenu.instance.PlayerDieResult();
     }
 }

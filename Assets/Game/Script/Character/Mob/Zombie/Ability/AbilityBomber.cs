@@ -8,6 +8,6 @@ public class AbilityBomber : Ability
     {
         GameObject ob = GameObject.FindGameObjectWithTag("Player");
         this.zombie.TakeDamage(this.zombie.GetCurrentHealth());
-        //ob.GetComponent<Mob>().TakeDamage(this.damage);
+        ob.GetComponent<Mob>().TakeDamage(this.damage);
     }
 }

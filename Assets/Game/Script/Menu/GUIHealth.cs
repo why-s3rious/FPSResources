@@ -7,17 +7,17 @@ public class GUIHealth : MonoBehaviour
 {
     [SerializeField]
     private Slider slider;
-
+    private Transform player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        this.transform.LookAt(player, Vector3.up);
     }
 
     public void Init(float defaultHealth)

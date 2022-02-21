@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject vfxBloodExplode;
+    public GameObject guiHealthForZombie;
+
+
     public int score = 0;
 
     // Start is called before the first frame update
@@ -15,10 +18,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        transform.Find(Level.CONSTRUCTION.ToString()).gameObject.SetActive(true);
     }
-
-    // Update is called once per frame
+        // Update is called once per frame
     void Update()
     {
         

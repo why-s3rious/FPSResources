@@ -15,6 +15,12 @@ public class MainMenu : MonoBehaviour
     private Button btnPlay;
 
     [SerializeField]
+    private Button btnPlayOpenPopup;
+
+    [SerializeField]
+    private GameObject popup;
+
+    [SerializeField]
     private Button btnContinute;
 
     [SerializeField]
@@ -29,7 +35,7 @@ public class MainMenu : MonoBehaviour
     {
         this.btnPlay.onClick.AddListener(OnClickStart);
         this.btnContinute.onClick.AddListener(OnClickContinute);
-
+        this.btnPlayOpenPopup.onClick.AddListener(OnClickOpenPopup);
 
     }
 
@@ -39,8 +45,15 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    private void OnClickOpenPopup()
+    {
+        groupBtn.SetActive(false);
+        popup.SetActive(true);
+    }
+
     private void OnClickStart()
     {
+        popup.SetActive(false); 
         groupBtn.SetActive(false);
         progressLoading.gameObject.SetActive(true);
         LoadingScene(1);

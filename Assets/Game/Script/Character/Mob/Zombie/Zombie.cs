@@ -19,6 +19,8 @@ public abstract class Zombie : Mob
     protected GameObject explodePrefab;
     [SerializeField]
     protected float damage;
+    [SerializeField]
+    protected GUIHealth guiHealth;
 
     public void SetExplodePrefab(GameObject explodePrefab)
     {
@@ -90,7 +92,6 @@ public abstract class Zombie : Mob
                 ob.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 //Destroy bullet object
                 Destroy(ob, 0.5f);
-                Destroy(gameObject);
             }
         }
         catch
@@ -116,7 +117,6 @@ public abstract class Zombie : Mob
     protected override void OnDead()
     {
         animator.SetBool("isDead",true);
-        GameManager.instance.IncreaseScore();
     }
 
     public NavMeshAgent GetAgent()
@@ -154,5 +154,17 @@ public abstract class Zombie : Mob
     public virtual void InitZombie(float health, float damage, float distant,float percentageBoost, float frequency)
     {
         InitZombie(health);
+    }
+    public void SetGuiHealth(GameObject gui)
+    {
+        GUIHealth guiHealth = Instantiate(gui, this.transform).GetComponent<GUIHealth>();
+        this.guiHealth = guiHealth;
+        this.guiHealth.Init(this.health);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        this.guiHealth.SetValueHealthBar(this.health);
     }
 }

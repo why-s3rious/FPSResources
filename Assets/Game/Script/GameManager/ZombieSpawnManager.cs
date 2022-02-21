@@ -7,7 +7,7 @@ public class ZombieSpawnManager : MonoBehaviour
 {
 
     [SerializeField]
-    private List<Transform> listZombieSpawn;
+    private List<Zombie> listZombieSpawn;
 
     [Tooltip("List waypoint zombie spawn")]
     [SerializeField]
@@ -27,7 +27,7 @@ public class ZombieSpawnManager : MonoBehaviour
     private int maxSpawn = 20;
 
     [SerializeField]
-    private float timeSpawn = 1f;
+    private float timeSpawn = 5f;
     private float countTime = 0f;
     [SerializeField]
     private bool canSpawn = false;
@@ -41,18 +41,39 @@ public class ZombieSpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         SpawnZombie();
+
+        foreach(Zombie zom in listZombieSpawn)
+        {
+            if(zom.IsDead())
+            {
+                listZombieSpawn.Remove(zom);
+                Destroy(zom.gameObject);
+                GameManager.instance.IncreaseScore();
+                break;
+            }
+        }
     }
 
     private void SpawnZombie()
     {
         if(canSpawn)
         {
+            
             int size = Random.Range(minSpawn, maxSpawn);
-            Random.seed = 42;
+            if (listZombieSpawn.Count > maxSpawn)
+            {
+                canSpawn = false;
+                return;
+            }
+            else if (listZombieSpawn.Count + size > maxSpawn) ;
+            {
+                size = maxSpawn - listZombieSpawn.Count;
+            }
+            
             for (int i = 0; i < size; i++)
             {
-                
                 Transform ob = Instantiate(prefabsZombie[Random.Range(0, prefabsZombie.Count)], positionsZombieSpawn[Random.Range(0, positionsZombieSpawn.Count)]).transform;
                 ZombieType zombieType = (ZombieType)Random.Range(0, System.Enum.GetValues(typeof(ZombieType)).Length);
                 int health = Random.Range(0, 30);
@@ -60,11 +81,22 @@ public class ZombieSpawnManager : MonoBehaviour
                 float damage = Random.Range(1f, 3f);
                 float percenBoost = Random.Range(0.1f, 0.13f);
                 ob.gameObject.AddComponent(typeof(NavMeshAgent));
-                Zombie zombie = ob.gameObject.AddComponent(ZombieFactory.GetZombieByType(ZombieType.NORMAL).GetType()) as Zombie;
+                Zombie zombie = ob.gameObject.AddComponent(ZombieFactory.GetZombieByType(zombieType).GetType()) as Zombie;
                 zombie.InitZombie(health, damage, distant, percenBoost, 0f);
+                zombie.SetGuiHealth(GameManager.instance.guiHealthForZombie);
                 zombie.SetExplodePrefab(GameManager.instance.vfxBloodExplode);
+                listZombieSpawn.Add(zombie);
             }
             canSpawn = false;
+        }
+        else
+        {
+            countTime += Time.deltaTime;
+            if(countTime > timeSpawn)
+            {
+                canSpawn = true;
+                countTime = 0;
+            }
         }
 
 
