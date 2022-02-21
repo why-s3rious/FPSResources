@@ -145,11 +145,12 @@ public class Projectile : MonoBehaviour {
 			//Toggle "isHit" on gas tank object
 			collision.transform.gameObject.GetComponent<Zombie>().TakeDamage(3f);
 			//Instantiate random impact prefab from array
-            Instantiate(bloodImpactPrefabs[Random.Range
+            GameObject ob = Instantiate(bloodImpactPrefabs[Random.Range
                 (0, bloodImpactPrefabs.Length)], transform.position,
-                Quaternion.LookRotation(collision.contacts[0].normal));
-            //Destroy bullet object
-            Destroy(gameObject);
+                Quaternion.LookRotation(collision.contacts[0].normal)).gameObject;
+			//Destroy bullet object
+			Destroy(ob,0.5f);
+			Destroy(gameObject,0.5f);
 			Debug.Log("Hit Zombie");
 		}
 
