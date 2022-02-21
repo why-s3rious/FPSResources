@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        transform.Find(Level.CONSTRUCTION.ToString()).gameObject.SetActive(true);
+        Level level = (Level)Random.Range(0, System.Enum.GetValues(typeof(Level)).Length);
+        transform.Find(level.ToString()).gameObject.SetActive(true);
     }
         // Update is called once per frame
     void Update()
