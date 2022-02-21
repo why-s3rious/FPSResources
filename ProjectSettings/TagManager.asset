@@ -17,6 +17,7 @@ TagManager:
   - Dirt (Static)
   - Wood
   - Zombie
+  - Explode
   layers:
   - Default
   - TransparentFX
