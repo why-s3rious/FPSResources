@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 19e0c5579df40de4aa97a21f52db02b4
+guid: ac733d71f11af594184e88b03ba502c6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Zombie Punching
+    second: Zombie Punching Recover
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,10 +35,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Zombie Punching
+      name: Zombie Punching Recover
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
+      firstFrame: 50
       lastFrame: 115
       wrapMode: 0
       orientationOffsetY: 0
@@ -48,9 +48,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
