@@ -10,7 +10,8 @@ public class Yuri : Human
         this.skillType = SkillType.SLOW_TIME;
         this.Init(10f);
         InitSkill(1,2,this.transform);
+        PlayerMenu.instance.Init(10f);
     }
-   
+
 
 }

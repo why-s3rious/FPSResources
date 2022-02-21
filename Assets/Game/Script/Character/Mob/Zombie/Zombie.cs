@@ -19,6 +19,12 @@ public abstract class Zombie : Mob
     protected GameObject explodePrefab;
     [SerializeField]
     protected float damage;
+
+    public void SetExplodePrefab(GameObject explodePrefab)
+    {
+        this.explodePrefab = explodePrefab;
+    }
+
     // Start is called before the first frame update
 
 
@@ -28,7 +34,7 @@ public abstract class Zombie : Mob
     }
 
 
-    public void InitZombie(float health)
+    public virtual void InitZombie(float health)
     {
         this.Init(health);
         this.animator = GetComponent<Animator>();
@@ -76,11 +82,22 @@ public abstract class Zombie : Mob
 
     public void Explode()
     {
-        Debug.Log("Bomber Explode");
-        GameObject ob = Instantiate(explodePrefab, this.transform.position,this.transform.rotation).gameObject;
-        //Destroy bullet object
-        Destroy(ob, 0.5f);
-        Destroy(gameObject, 0.5f);
+        try
+        {   if(this.isDead)
+            {
+                Debug.Log("Bomber Explode");
+                GameObject ob = Instantiate(explodePrefab, this.transform.position, this.transform.rotation).gameObject;
+                ob.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                //Destroy bullet object
+                Destroy(ob, 0.5f);
+                Destroy(gameObject);
+            }
+        }
+        catch
+        {
+
+        }
+       
 
     }
     public void ActiveAbility()
@@ -99,6 +116,7 @@ public abstract class Zombie : Mob
     protected override void OnDead()
     {
         animator.SetBool("isDead",true);
+        GameManager.instance.IncreaseScore();
     }
 
     public NavMeshAgent GetAgent()
@@ -115,14 +133,26 @@ public abstract class Zombie : Mob
     }
     private void OnCollisionEnter(Collision collision)
     {
+        
     }
     private void OnParticleCollision(GameObject other)
     {
         if(other.transform.tag == "Explode")
         {
-            SetDead();
+            if(this.gameObject != other)
+            {
+                SetDead();
+            }
         }
     }
 
+    public void ApplyDamage(Transform target)
+    {
+        target.GetComponent<Mob>().TakeDamage(this.damage);
+    }
 
+    public virtual void InitZombie(float health, float damage, float distant,float percentageBoost, float frequency)
+    {
+        InitZombie(health);
+    }
 }

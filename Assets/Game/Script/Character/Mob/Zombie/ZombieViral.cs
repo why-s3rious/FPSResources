@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class ZombieViral : Zombie
 {
+    public override void InitZombie(float health, float damage, float distant, float percentageBoost, float frequency)
+    {
+        base.InitZombie(health, damage, distant, percentageBoost, frequency);
+        this.InitAbility(damage, distant, percentageBoost, frequency, FrequencyType.ONCE, AbilityType.VIRAL);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        this.InitZombie(1f);
-        this.InitAbility(5f, 10f, 1.5f, 0, FrequencyType.ONCE, AbilityType.VIRAL);
+
     }
+
+    
 }

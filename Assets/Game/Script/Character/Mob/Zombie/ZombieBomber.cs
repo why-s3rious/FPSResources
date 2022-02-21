@@ -5,21 +5,17 @@ using UnityEngine;
 public class ZombieBomber : Zombie
 {
     // Start is called before the first frame update
-    [SerializeField]
-    private float distantToExplode = 5f;
+    public override void InitZombie(float health, float damage, float distant, float percentageBoost, float frequency)
+    {
+        base.InitZombie(health, damage, distant, percentageBoost, frequency);
+        this.InitAbility(damage, distant, percentageBoost, frequency, FrequencyType.ONCE, AbilityType.BOMBER);
 
+    }
     protected override void OnDead()
     {
-        base.OnDead();
         this.Explode();
+        base.OnDead();
+        
     }
-
-    void Start()
-    {
-        this.InitZombie(1f);
-        this.InitAbility(10f, distantToExplode, 0, 0, FrequencyType.ONCE, AbilityType.BOMBER);
-    }
-
-
 
 }

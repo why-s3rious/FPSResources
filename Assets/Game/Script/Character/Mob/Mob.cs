@@ -34,7 +34,7 @@ public abstract class Mob : MonoBehaviour
     {
         return this.health;
     }
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         health = health < 0 ? 0 : health; 

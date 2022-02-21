@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Human : Mob
 {
+    public static float opacityHurt = 0f;
     [SerializeField]
     protected SkillType skillType;
     [SerializeField]
@@ -29,5 +30,17 @@ public abstract class Human : Mob
         {
             skill.Activate();
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        opacityHurt = 1f;
+        PlayerMenu.instance.TakeDamage(this.GetCurrentHealth());
+    }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
     }
 }
