@@ -143,7 +143,7 @@ public class Projectile : MonoBehaviour {
         if (collision.transform.tag == "Zombie")
         {
 			//Toggle "isHit" on gas tank object
-			collision.transform.gameObject.GetComponent<Zombie>().TakeDamage(0.1f);
+			collision.transform.gameObject.GetComponent<Zombie>().TakeDamage(3f);
 			//Instantiate random impact prefab from array
             GameObject ob = Instantiate(bloodImpactPrefabs[Random.Range
                 (0, bloodImpactPrefabs.Length)], transform.position,
